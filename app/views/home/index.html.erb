@@ -1,0 +1,20 @@
+<!-- # app/views/home/index.html.erb -->
+
+<!-- menampilkan pesan notice -->
+<% if notice %>
+    <p><%= notice %></p>
+<% end %>
+
+<!-- menampilkan pesan alert -->
+<% if alert %>
+    <p><%= alert %></p>
+<% end %>
+
+<ul>
+    <li>Name : <%= current_user.name %></li>
+    <li>Phone : <%= current_user.phone %></li>
+    <li>Email : <%= current_user.email %></li>
+    <li>
+        <%= link_to 'Logout', user_logout_path(current_user), method: :delete %>
+    </li>
+</ul>
