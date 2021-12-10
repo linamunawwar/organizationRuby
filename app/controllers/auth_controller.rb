@@ -13,7 +13,7 @@ class AuthController < ApplicationController
 
                 # membuat session dengan key = :user_id
                 session[:user_id] = user.id
-                redirect_to home_index_path, notice: "Selamat datang #{user.name}"
+                redirect_to organizations_index_path, notice: "Selamat datang #{user.name}"
             else
                 redirect_to form_login_path, alert: "Password tidak sesuai"
             end

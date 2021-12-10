@@ -1,5 +1,8 @@
 <div class="container p-3 my-3 border">
-  <p id="notice"><%= notice %></p>
+  <h3>Organization Detail</h3>
+  <% if notice %>
+    <p id="notice" class="alert alert-success" ><%= notice %></p>
+  <% end %>
 
   <p>
     <strong>Name:</strong>
@@ -25,7 +28,37 @@
     <strong>Logo:</strong>
     <%= image_tag @organization.logo.url,  style: 'height:10vw;width:10vw;margin-bottom:20px;'  %>
   </p>
-
   <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-warning" %> |
-  <%= link_to 'Back', organizations_path, class: "btn btn-default" %>
+   <%= link_to 'Back', organizations_path, class: "btn btn-default" %>
+
+  <h3>List Person</h3>
+  <%= link_to 'Add New Person', new_organization_person_path(@organization), class: "btn btn-success" %>
+  <table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @persons.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.email %></td>
+        <td><%= image_tag person.avatar.url,  style: 'height:5vw;width:5vw;margin-bottom:20px;' %></td>
+        <td><%= link_to 'Show', organization_person_path(@organization,person), class: "btn btn-primary", style: "color:white;" %></td>
+        <td><%= link_to 'Edit', edit_organization_person_path(@organization,person), class: "btn btn-warning" %></td>
+        <td><%= link_to 'Destroy', organization_person_path(@organization,person), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  
+ 
 </div>

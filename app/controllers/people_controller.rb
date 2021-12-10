@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
+  before_action :user_signed_in?
   before_action :set_person, only: %i[ show edit update destroy ]
+  helper_method :current_user
 
   # GET /people or /people.json
   def index
@@ -25,7 +27,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: "Person was successfully created." }
+        format.html { redirect_to organization_path(@person.organization_id), notice: "Person was successfully created." }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to @person, notice: "Person was successfully updated." }
+        format.html { redirect_to organization_path(@person.organization_id), notice: "Person was successfully updated." }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +53,7 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
+      format.html { redirect_to organization_path(@person.organization_id), notice: "Person was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -64,6 +66,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:name, :phone, :email, :logo)
+      params.require(:person).permit(:name, :phone, :email, :avatar, :organization_id)
     end
 end

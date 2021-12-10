@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container p-3 my-3 border" style="margin-top: 30px;">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @person.name %>
-</p>
+	<p>
+	  <strong>Name:</strong>
+	  <%= @person.name %>
+	</p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @person.phone %>
-</p>
+	<p>
+	  <strong>Phone:</strong>
+	  <%= @person.phone %>
+	</p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @person.email %>
-</p>
+	<p>
+	  <strong>Email:</strong>
+	  <%= @person.email %>
+	</p>
 
-<p>
-  <strong>Logo:</strong>
-  <%= @person.logo %>
-</p>
+	<p>
+	  <strong>Avatar:</strong>
+	  <%= @person.avatar %>
+	</p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+	<%= link_to 'Edit', edit_organization_person_path(params[:organization_id],@person), class: "btn btn-warning" %>
+	<%= link_to 'Back', organization_path(params[:organization_id]), class: "btn btn-default" %>
+</div>

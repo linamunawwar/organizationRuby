@@ -1,5 +1,8 @@
 class OrganizationsController < ApplicationController
+
+  before_action :user_signed_in?
   before_action :set_organization, only: %i[ show edit update destroy ]
+  helper_method :current_user
 
   # GET /organizations or /organizations.json
   def index
@@ -8,6 +11,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1 or /organizations/1.json
   def show
+    @persons = Person.where(organization_id: params[:id])
   end
 
   # GET /organizations/new
@@ -53,6 +57,18 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to organizations_url, notice: "Organization was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def search
+    if params[:search].blank?
+      redirect_to organizations_path and return
+    else
+      @parameter = params[:search].downcase
+      # @results = Organization.all.where("lower(name) LIKE :search", search: "%#{@parameter}")
+      # @matchOrganizations = Organization.where("name LIKE ?", "%#{@parameter}%")
+      # @matchPerson = Person.search("%#{@parameter}")
+      @organizations = Organization.includes(:persons).references(:persons).search(params[:search])
     end
   end
 

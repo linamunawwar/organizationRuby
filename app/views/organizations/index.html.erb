@@ -1,8 +1,10 @@
 <div class="container p-3 my-3 border">
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice" class="alert alert-success" ><%= notice %></p>
+  <% end %>
 
   <h1>Organizations</h1>
-
+  <%= link_to 'Logout', user_logout_path(current_user), class:"btn btn-danger pull-right", style: "margin-bottom:20px;", method: :delete%>
   <%= link_to 'New Organization', new_organization_path, {class:"btn btn-success", style: "margin-bottom:20px;"} %>
   <table class="table table-stripped">
     <thead>

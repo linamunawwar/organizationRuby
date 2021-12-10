@@ -1,6 +1,44 @@
-<h1>Editing Person</h1>
+<div class="container p-3 my-3 border">	
+	<h1>Editing Person</h1>
 
-<%= render 'form', person: @person %>
+	<%= form_with(model: @person, url: organization_person_path(params[:organization_id])) do |form| %>
+		  <% if @person.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
-<%= link_to 'Show', @person %> |
-<%= link_to 'Back', people_path %>
+		      <ul>
+		        <% @person.errors.each do |error| %>
+		          <li><%= error.full_message %></li>
+		        <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <div class="field form-group">
+		    <%= form.label :name %>
+		    <%= form.text_field :name,class: "form-control" %>
+		  </div>
+
+		  <div class="field form-group">
+		    <%= form.label :phone %>
+		    <%= form.text_field :phone, class: "form-control" %>
+		  </div>
+
+		  <div class="field form-group">
+		    <%= form.label :email %>
+		    <%= form.text_field :email, class: "form-control" %>
+		  </div>
+
+		  <div class="field form-group">
+		    <%= form.label :avatar %>
+		    <%= form.file_field :avatar, class: "form-control" %>
+		  </div>
+
+		  <div class="actions">
+		    <%= form.submit %>
+		  </div>
+		<% end %>
+
+	<%= link_to 'Show', organization_person_path(params[:organization_id],@person) %> |
+	<%= link_to 'Back', organization_path(params[:organization_id]) %>
+</div>
