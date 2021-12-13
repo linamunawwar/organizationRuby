@@ -36,6 +36,14 @@
     <%= form.file_field :logo, class: "form-control" %>
   </div>
 
+  <%= form.label :Account %>
+    <%= form.select(:user_id) do %>
+      <%= content_tag(:option, "Pilih Account", value: 0) %>
+      <% @users.each do |u| -%>
+        <%= content_tag(:option, u.name, value: u.id) %>
+      <% end %>
+    <% end %>
+
   <div class="actions">
     <%= form.submit :class => 'btn btn-primary' %>
   </div>

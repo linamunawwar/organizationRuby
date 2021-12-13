@@ -6,7 +6,11 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    @organizations = Organization.all
+    if session[:role_id] == 1
+     @organizations = Organization.all
+    else
+      @organizations = Organization.where(user_id: session[:user_id])
+    end
   end
 
   # GET /organizations/1 or /organizations/1.json
@@ -17,14 +21,17 @@ class OrganizationsController < ApplicationController
   # GET /organizations/new
   def new
     @organization = Organization.new
+    @users = User.all
   end
 
   # GET /organizations/1/edit
   def edit
+    @users = User.all
   end
 
   # POST /organizations or /organizations.json
   def create
+    @users = User.all
     @organization = Organization.new(organization_params)
 
     respond_to do |format|
@@ -40,6 +47,7 @@ class OrganizationsController < ApplicationController
 
   # PATCH/PUT /organizations/1 or /organizations/1.json
   def update
+    @users = User.all
     respond_to do |format|
       if @organization.update(organization_params)
         format.html { redirect_to @organization, notice: "Organization was successfully updated." }
@@ -80,6 +88,6 @@ class OrganizationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.require(:organization).permit(:name, :phone, :email, :website, :logo)
+      params.require(:organization).permit(:name, :phone, :email, :website, :logo, :user_id)
     end
 end

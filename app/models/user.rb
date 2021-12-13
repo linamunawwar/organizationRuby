@@ -5,4 +5,5 @@ class User < ApplicationRecord
     validates :role_id, presence: true
 
     has_secure_password
+    has_many :organizations
 end

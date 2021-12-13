@@ -11,16 +11,6 @@
   </head>
 
   <body>
-    <div class="container">
-    <%= form_tag(organizations_search_path, :method => "get") do %>
-      <div class="input-group">
-        <%= search_field_tag :search, params[:search], placeholder: "Type ", class: "form_control" %>
-        <div class="input-group-btn">
-          <%= button_tag " Search for Organization", class: "btn btn-info glyphicon glyphicon-search", :name => nil%>
-        </div>
-      </div>
-    <% end %>
-  </div>
     <%= yield %>
   </body>
 </html>

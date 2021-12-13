@@ -28,6 +28,11 @@
     <strong>Logo:</strong>
     <%= image_tag @organization.logo.url,  style: 'height:10vw;width:10vw;margin-bottom:20px;'  %>
   </p>
+  <p>
+    <strong>Account Manager:</strong>
+    <%= @organization.users.try(:name)  %>
+    <%= @organization.user_id  %>
+  </p>
   <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-warning" %> |
    <%= link_to 'Back', organizations_path, class: "btn btn-default" %>
 

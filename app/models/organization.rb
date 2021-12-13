@@ -5,8 +5,10 @@ class Organization < ApplicationRecord
     validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :website, presence: true
     validates :logo, presence: true
+    validates :user_id, presence: true
 
     has_many :persons
+    belongs_to :users, optional: true
 
 
     scope :search, -> (search) {
