@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_103537) do
+ActiveRecord::Schema.define(version: 2021_12_13_141408) do
 
   create_table "organizations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name"
@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 2021_12_12_103537) do
     t.text "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "fk_rails_7b93e0061c"
   end
 
   create_table "people", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -50,4 +51,5 @@ ActiveRecord::Schema.define(version: 2021_12_12_103537) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "organizations", "users"
 end

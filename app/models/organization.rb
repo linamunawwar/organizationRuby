@@ -8,7 +8,7 @@ class Organization < ApplicationRecord
     validates :user_id, presence: true
 
     has_many :persons
-    belongs_to :users, optional: true
+    belongs_to :user, foreign_key: :user_id, optional: true
 
 
     scope :search, -> (search) {

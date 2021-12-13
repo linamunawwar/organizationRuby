@@ -30,8 +30,7 @@
   </p>
   <p>
     <strong>Account Manager:</strong>
-    <%= @organization.users.try(:name)  %>
-    <%= @organization.user_id  %>
+    <%= @organization.user.name %>
   </p>
   <% if session[:user_id] ==  @organization.user_id || session[:user_id] == 1 %>
     <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-warning" %> |
