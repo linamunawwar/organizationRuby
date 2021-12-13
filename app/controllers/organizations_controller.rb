@@ -10,6 +10,7 @@ class OrganizationsController < ApplicationController
      @organizations = Organization.all
     else
       @organizations = Organization.where(user_id: session[:user_id])
+      @organizations_noaccess = Organization.where.not(user_id: session[:user_id])
     end
   end
 

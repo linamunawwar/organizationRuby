@@ -39,6 +39,19 @@
           <td><%= link_to 'Destroy', organization, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
+      <% if @organizations_noaccess %>
+        <% @organizations_noaccess.each do |organization| %>
+          <tr>
+            <td><%= organization.name %></td>
+            <td><%= organization.phone %></td>
+            <td><%= organization.email %></td>
+            <td><%= organization.website %></td>
+            <td><%= organization.logo %></td>
+            <td><%= link_to 'Show', organization, class: "btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+
     </tbody>
   </table>
 

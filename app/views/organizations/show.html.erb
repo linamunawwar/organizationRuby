@@ -33,11 +33,15 @@
     <%= @organization.users.try(:name)  %>
     <%= @organization.user_id  %>
   </p>
-  <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-warning" %> |
-   <%= link_to 'Back', organizations_path, class: "btn btn-default" %>
+  <% if session[:user_id] ==  @organization.user_id || session[:user_id] == 1 %>
+    <%= link_to 'Edit', edit_organization_path(@organization), class: "btn btn-warning" %> |
+  <% end %>
+  <%= link_to 'Back', organizations_path, class: "btn btn-default" %>
 
   <h3>List Person</h3>
-  <%= link_to 'Add New Person', new_organization_person_path(@organization), class: "btn btn-success" %>
+   <% if session[:user_id] ==  @organization.user_id || session[:user_id] == 1 %>
+    <%= link_to 'Add New Person', new_organization_person_path(@organization), class: "btn btn-success" %>
+    <% end %>
   <table class="table table-stripped">
   <thead>
     <tr>
@@ -56,9 +60,11 @@
         <td><%= person.phone %></td>
         <td><%= person.email %></td>
         <td><%= image_tag person.avatar.url,  style: 'height:5vw;width:5vw;margin-bottom:20px;' %></td>
-        <td><%= link_to 'Show', organization_person_path(@organization,person), class: "btn btn-primary", style: "color:white;" %></td>
-        <td><%= link_to 'Edit', edit_organization_person_path(@organization,person), class: "btn btn-warning" %></td>
-        <td><%= link_to 'Destroy', organization_person_path(@organization,person), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if session[:user_id] ==  @organization.user_id || session[:user_id] == 1 %>
+          <td><%= link_to 'Show', organization_person_path(@organization,person), class: "btn btn-primary", style: "color:white;" %></td>
+          <td><%= link_to 'Edit', edit_organization_person_path(@organization,person), class: "btn btn-warning" %></td>
+          <td><%= link_to 'Destroy', organization_person_path(@organization,person), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
